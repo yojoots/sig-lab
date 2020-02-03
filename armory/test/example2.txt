@@ -1,0 +1,9 @@
+-----BEGIN-SIGNATURE-BLOCK-------------------------------------
+Address: 1MkanKef93F1iNLKvyijrbbW2k5VaXzDvA
+Message: "Nor this, given a bit of algebra."
+PublicKey: 03742088316dacf400cea17fdea1dba3bc1e1f58ac0f852fd8
+5545b0ba7ebaee79
+Signature: 10000000000000000000000000000000000000000000000000
+10000000000000000000000000000000000000000000000000
+1000000000000000000000000000
+-----END-SIGNATURE-BLOCK---------------------------------------

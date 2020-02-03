@@ -1,0 +1,9 @@
+-----BEGIN-SIGNATURE-BLOCK-------------------------------------
+Address: 13yaSqGNDzt1mNW4vrKM9CvD46cTavNabF
+Message: "There is nothing too shocking about this signature"
+PublicKey: 02000000000005689111130e588a12ecda87b2dc5585c6c6ba
+66a412fa0cce65bc
+Signature: ffffffff077b7209dc866fbfa0d2bf67a0c696afffe57a822e
+2ba90059a2cc7abb998becb4e427650e282522bf9576524665
+301b807c0e3194cf1e6c795a0cf7
+-----END-SIGNATURE-BLOCK---------------------------------------

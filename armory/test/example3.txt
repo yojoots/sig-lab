@@ -1,0 +1,9 @@
+-----BEGIN-SIGNATURE-BLOCK-------------------------------------
+Address: 13see6qjfupx1YWgRefwEkccZeM8QGTAiJ
+Message: "But can you explain this one?"
+PublicKey: 0200000000000000000000003b78ce563f89a0ed9414f5aa28
+ad0d96d6795f9c63
+Signature: deadbeef2f4a23b0f1954100b76bcb720f7b2ddc4a446dc06b
+8ffc4e143286e1e441f5f1583f300022ad3d134413a212581b
+cd36c20c7840d15b4d6b8e8f177f
+-----END-SIGNATURE-BLOCK---------------------------------------
