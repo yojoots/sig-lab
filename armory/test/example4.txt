@@ -1,0 +1,6 @@
+-----BEGIN-SIGNATURE-BLOCK-------------------------------------
+Address: 1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj
+Message: "This signature uses a not-very-private key!"
+PublicKey: 02588d202afcc1ee4ab5254c7847ec25b9a135bbda0f2bc69ee1a714749fd77dc9
+Signature: 534e566dd0718f1cb8a10bf09eb32670c5c5eddf7600b46d060069b8d496c4d6beaa4fbdfb8749a367f6f99bed1782f7aecea56db382f1ff8a0a3cec3d4d614d
+-----END-SIGNATURE-BLOCK---------------------------------------
