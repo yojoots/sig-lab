@@ -1,0 +1,14 @@
+#container {
+    margin-left:10px;
+}
+
+#hexKey, #binKey {
+    font-size: 15px;
+    font-family: monospace;
+    max-width: 580px;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    margin-bottom:1px;
+}
