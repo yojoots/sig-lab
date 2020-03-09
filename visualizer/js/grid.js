@@ -1,7 +1,7 @@
 let grid = d3.select("#grid")
-	.append("svg")
-	.attr("width","600px")
-	.attr("height","190px");
+            .append("svg")
+            .attr("width","600px")
+            .attr("height","190px");
 
 let keyData = new Array(256).fill().map(u => ({value:false}));
 let mouseDown = false;
@@ -17,22 +17,22 @@ document.documentElement.addEventListener('mouseup', function(e){
 
 let row = grid.selectAll(".row")
     .data(keyData)
-	.enter().append("rect")
-	.attr("class","square")
-	.attr("x", function(d) {
+    .enter().append("rect")
+    .attr("class","square")
+    .attr("x", function(d) {
         if (coltracker%32 === 0) {xtracker = 1;}
         else { xtracker += cellSize; }
         coltracker++;
         return xtracker; 
     })
-	.attr("y", function(d) { 
+    .attr("y", function(d) {
         if (rowtracker%32 === 0) {ytracker += cellSize;} 
         rowtracker++; 
         return ytracker;
     })
-	.attr("width", function(d) { return cellSize; })
-	.attr("height", function(d) { return cellSize; })
-	.style("fill", "#fff")
+    .attr("width", function(d) { return cellSize; })
+    .attr("height", function(d) { return cellSize; })
+    .style("fill", "#fff")
     .style("stroke", "#222")
     .on("mouseover", function(d) {
         if(mouseDown) {
