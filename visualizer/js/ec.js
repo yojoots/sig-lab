@@ -340,7 +340,6 @@
             ( 4 * this.a * this.a * this.a + 27 * this.b * this.b ) === 0;
         // Order is important.
         this.roots = this.getRoots();
-        console.log("GETPLOTRANGE POINTS8:")
 
         this.plotRange = this.getPlotRange();
     };
@@ -357,6 +356,201 @@
         this.plot.setData( data );
         this.plot.setupGrid();
         this.plot.draw();
+
+        var points=data[0].data;
+
+        // Begin our non-intrusive d3 drawing
+        if (typeof d3 !== 'undefined') {
+            var rangePoints = this.getPlotRange();
+            var pointsOnOpenPortion = points;
+            var pointsOnClosedPortion = [];
+
+            if (points.indexOf(null) > 0) {
+                pointsOnClosedPortion = points.slice(0, points.indexOf(null));
+                pointsOnOpenPortion = points.slice(points.indexOf(null)+1);
+            }
+
+            // Set the dimensions of the canvas / graph
+            var margin = {top: 10, right: 2, bottom: 20, left: 20},
+            width = 600 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+            // Set the ranges
+            var x = d3.scaleLinear().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            // Wipe the slate clean
+            d3.select("svg").remove();
+
+            // Adds the svg canvas
+            //var svg = d3.select("main")
+            var svg = d3.select("#plotArea")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data
+            x.domain([rangePoints.xMin, rangePoints.xMax]);
+            y.domain([rangePoints.yMin, rangePoints.yMax]);
+
+            // Gridlines in x-axis function
+            function make_x_gridlines() {
+                return d3.axisBottom(x)
+                    .ticks(10)
+            }
+
+            // Gridlines in y-axis function
+            function make_y_gridlines() {
+                return d3.axisLeft(y)
+                    .ticks(10)
+            }
+
+            // Line-drawing helper function
+            var valueline = d3.line()
+                .x(function(d) { return x(d[0]); })
+                .y(function(d) { return y(d[1]); });
+
+            // Edge clipper helper
+            clip = svg.append("svg:clipPath")
+                .attr("id", "clip")
+                .append("svg:rect")
+                .attr("x", 0)
+                .attr("y", -1)
+                .attr("width", width+3)
+                .attr("height", height+2);
+
+            // (clipped) Chart body
+            chartBody = svg.append("g")
+                .attr("clip-path", "url(#clip)");
+
+            // Actually add the X gridlines
+            chartBody.append("g")
+                .attr("class", "grid grayLine")
+                .attr("transform", "translate(0," + height + ")")
+                .call(make_x_gridlines()
+                    .tickSize(-height)
+                    .tickFormat("")
+                )
+
+            // Actually add the Y gridlines
+            chartBody.append("g")
+                .attr("class", "grid grayLine")
+                .call(make_y_gridlines()
+                    .tickSize(-width)
+                    .tickFormat("")
+                );
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                //.attr("class", "blackLine")
+                .call(d3.axisBottom(x).tickSizeOuter(0));
+
+            // Add the Y Axis
+            svg.append("g")
+                //.attr("class", "blackLine")
+                .call(d3.axisLeft(y).tickSizeOuter(0));
+
+
+            if ('lines' in  data[0]) {
+                // If we have both open and closed portions, draw
+                // the open portion (the call above will handle the closed part)
+                if (pointsOnClosedPortion.length > 0) {
+                    chartBody.append("path")
+                    .data([pointsOnClosedPortion])
+                    .attr("class", "line steelblue")
+                    .attr("d", valueline);
+                    }
+
+                    // Draw the curve
+                    chartBody.append("path")
+                        .data([pointsOnOpenPortion])
+                        .attr("class", "line")
+                        .attr("stroke", function(d) {
+                            return data[0].color;
+                        })
+                        .attr("d", valueline);
+            } else {
+                chartBody.selectAll("dot")
+                    .data(points)
+                    .enter().append("circle")
+                    .attr("r", 3)
+                    .style("fill", "white")
+                    .style("stroke", "steelblue")
+                    .attr("cx", function(d) { return x(d[0]); })
+                    .attr("cy", function(d) { return y(d[1]); });
+            }
+
+            // Draw the curve
+            chartBody.append("path")
+                .data([pointsOnOpenPortion])
+                .attr("class", "line")
+                .attr("d", valueline);
+
+                for (let i = 0; i < data.length; i++) {
+                    let thisObject = data[i];
+                    if ('points' in thisObject) {
+                        chartBody.selectAll("dot")
+                            .data([thisObject.data])
+                            .enter().append("circle")
+                            .attr("r", thisObject.points.radius)
+                            .style("fill", "white")
+                            .style("stroke", thisObject.color)
+                            .attr("cx", function(d) {
+                                return x(d[0][0]);
+                            })
+                            .attr("cy", function(d) { return y(d[0][1]); });
+                    } else if ('lines' in thisObject) {
+                        // Draw the line
+                        var choppedPoints = [];
+                        var thesePoints = thisObject.data;
+                        var foundSplits = false;
+
+                        while (thesePoints.indexOf(null) > 0) {
+                            foundSplits = true;
+                            choppedPoints.push(thesePoints.slice(0, thesePoints.indexOf(null)));
+                            thesePoints = thesePoints.slice(thesePoints.indexOf(null)+1);
+                        }
+                        choppedPoints.push(thesePoints);
+                        thisObjectData = choppedPoints;
+
+                        if (foundSplits) {
+                            thisObjectData.forEach(function(linepointObject) {
+                                chartBody.append("path")
+                                .data([linepointObject])
+                                .attr("stroke", function(d) {
+                                    return thisObject.color;
+                                })
+                                .attr("d", valueline)
+                            });
+                        } else {
+                            chartBody.append("path")
+                            .data(thisObjectData)
+                            .attr("stroke", function(d) {
+                                return thisObject.color;
+                            })
+                            .attr("d", valueline);
+                        }
+
+                    }
+                }
+
+                // Add the explicit visual points (P and Q)
+                var myDots = chartBody.selectAll("dot")
+                .data([{"date": this.pxInput.val(), "close": this.pyInput.val(), "color": "#edd078"}, {"date": this.qxInput.val(), "close": this.qyInput.val(), "color": "#dd6767"}])
+                .enter().append("circle")
+                .attr("r", 5)
+                .style("fill", "white")
+                .style("stroke", function(d){ return d.color; })
+                .attr("cx", function(d) {
+                    return x(d.date);
+                })
+                .attr("cy", function(d) { return y(d.close); });
+        }
+
     };
 
     $.ec.Base.prototype.updateResults = function() {
@@ -555,8 +749,6 @@
             points.push([ 1, 0 ]);
         }
 
-        console.log("GETPLOTRANGE POINTS:", points)
-
         return $.ec.Base.prototype.getPlotRange.call( this, points );
     };
 
@@ -617,135 +809,6 @@
             // ... and an open branch.
             getPoints( this.roots[ 2 ], this.plotRange.xMax, false );
         }
-
-
-        // Begin our non-intrusive d3 drawing
-        if (typeof d3 !== 'undefined') {
-            var rangePoints = this.getPlotRange();
-            var pointsOnOpenPortion = points;
-            var pointsOnClosedPortion = [];
-
-            if (points.indexOf(null) > 0) {
-                pointsOnClosedPortion = points.slice(0, points.indexOf(null));
-                pointsOnOpenPortion = points.slice(points.indexOf(null)+1);
-            }
-
-            // Set the dimensions of the canvas / graph
-            var margin = {top: 10, right: 2, bottom: 20, left: 20},
-            width = 600 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
-
-            // Set the ranges
-            var x = d3.scaleLinear().range([0, width]);
-            var y = d3.scaleLinear().range([height, 0]);
-
-            // Wipe the slate clean
-            d3.select("svg").remove();
-
-            // Adds the svg canvas
-            //var svg = d3.select("main")
-            var svg = d3.select("#plotArea")
-                .append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                    .attr("transform", 
-                        "translate(" + margin.left + "," + margin.top + ")");
-
-            // Scale the range of the data
-            x.domain([rangePoints.xMin, rangePoints.xMax]);
-            y.domain([rangePoints.yMin, rangePoints.yMax]);
-
-            // Gridlines in x-axis function
-            function make_x_gridlines() {		
-                return d3.axisBottom(x)
-                    .ticks(10)
-            }
-
-            // Gridlines in y-axis function
-            function make_y_gridlines() {		
-                return d3.axisLeft(y)
-                    .ticks(10)
-            }
-
-            // Line-drawing helper function
-            var valueline = d3.line()
-                .x(function(d) { return x(d[0]); })
-                .y(function(d) { return y(d[1]); });
-
-            // Edge clipper helper
-            clip = svg.append("svg:clipPath")
-                .attr("id", "clip")
-                .append("svg:rect")
-                .attr("x", 0)
-                .attr("y", -1)
-                .attr("width", width+3)
-                .attr("height", height+2);
-
-            // (clipped) Chart body
-            chartBody = svg.append("g")
-                .attr("clip-path", "url(#clip)");
-
-            // Actually add the X gridlines
-            chartBody.append("g")			
-                .attr("class", "grid grayLine")
-                .attr("transform", "translate(0," + height + ")")
-                .call(make_x_gridlines()
-                    .tickSize(-height)
-                    .tickFormat("")
-                )
-
-            // Actually add the Y gridlines
-            chartBody.append("g")			
-                .attr("class", "grid grayLine")
-                .call(make_y_gridlines()
-                    .tickSize(-width)
-                    .tickFormat("")
-                );
-
-            // Draw the curve
-            chartBody.append("path")
-                .data([pointsOnOpenPortion])
-                .attr("class", "line")
-                .attr("d", valueline);
-
-            // If we have both open and closed portions, draw
-            // the open portion (the call above will handle the closed part)
-            if (pointsOnClosedPortion.length > 0) {
-                chartBody.append("path")
-                .data([pointsOnClosedPortion])
-                .attr("class", "line")
-                .attr("d", valueline);   
-            }
-                
-            // Add the X Axis
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                //.attr("class", "blackLine")
-                .call(d3.axisBottom(x).tickSizeOuter(0));
-
-            // Add the Y Axis
-            svg.append("g")
-                //.attr("class", "blackLine")
-                .call(d3.axisLeft(y).tickSizeOuter(0));
-
-            // Add the explicit visual points (P and Q)
-            var myDots = chartBody.selectAll("dot")
-                        .data([{"date": this.pxInput.val(), "close": this.pyInput.val(), "color": "#edd078"}, {"date": this.qxInput.val(), "close": this.qyInput.val(), "color": "#dd6767"}])
-                        .enter().append("circle")
-                        .attr("r", 5)
-                        .style("fill", function(d){ return d.color; })
-                        .attr("cx", function(d) { return x(d.date); })
-                        .attr("cy", function(d) { return y(d.close); });
-
-            myDots.append("text")
-                .attr("x", function(d) { return x(d.date); })
-                .attr("y", function(d) { return y(d.close); })
-                .text("test");
-        }
-
-
-
 
         return points;
     };
@@ -965,75 +1028,6 @@
             data: [ this.p, this.q ],
             points: { show: true, radius: 5 }
         });
-
-        var rPoint = [this.r[ 0 ], -this.r[ 1 ]];
-
-        // Begin our non-intrusive d3 drawing
-        if (typeof d3 !== 'undefined') {
-            var rangePoints = this.getPlotRange();
-            var points = linePoints;
-            var pointsOnOpenPortion = points;
-            var pointsOnClosedPortion = [];
-
-            if (points.indexOf(null) > 0) {
-                pointsOnClosedPortion = points.slice(0, points.indexOf(null));
-                pointsOnOpenPortion = points.slice(points.indexOf(null)+1);
-            }
-
-            // Set the dimensions of the canvas / graph
-            var margin = {top: 10, right: 2, bottom: 20, left: 20},
-            width = 600 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
-
-            // Set the ranges
-            var x = d3.scaleLinear().range([0, width]);
-            var y = d3.scaleLinear().range([height, 0]);
-
-            // Adds the svg canvas
-            //var svg = d3.select("main")
-            var svg = d3.select("#plotArea")
-                .select("svg")
-                .select("g");
-
-            // Scale the range of the data
-            x.domain([rangePoints.xMin, rangePoints.xMax]);
-            y.domain([rangePoints.yMin, rangePoints.yMax]);
-
-            // Line-drawing helper function
-            var valueline = d3.line()
-                .x(function(d) { return x(d[0]); })
-                .y(function(d) { return y(d[1]); });
-
-            // (clipped) Chart body
-            chartBody = svg.append("g")
-                .attr("clip-path", "url(#clip)");
-
-            // Draw the line
-            chartBody.append("path")
-                .data([[[rPoint[0], rPoint[1]], [rPoint[0], -rPoint[1]]]])
-                .attr("class", "line redLine")
-                .attr("d", d3.line()
-                .x(function(d) { return x(d[0]); })
-                .y(function(d) { return y(d[1]); }));
-
-            // Draw the line
-            chartBody.append("path")
-                .data([pointsOnOpenPortion])
-                .attr("class", "line yellowLine")
-                .attr("d", d3.line()
-                .x(function(d) { return x(d[0]); })
-                .y(function(d) { return y(d[1]); }));
-
-
-            // Add the explicit visual points (P and Q)
-            var myDots = chartBody.selectAll("dot")
-            .data([{"date": this.pxInput.val(), "close": this.pyInput.val(), "color": "#edd078"}, {"date": this.qxInput.val(), "close": this.qyInput.val(), "color": "#edd078"}, {"date": rPoint[0], "close": -rPoint[1], "color": "#dd6767"}])
-            .enter().append("circle")
-            .attr("r", 5)
-            .style("fill", function(d){ return d.color; })
-            .attr("cx", function(d) { return x(d.date); })
-            .attr("cy", function(d) { return y(d.close); });
-        }
 
         return data;
     };
@@ -1751,7 +1745,6 @@
         if( this.q !== null ) {
             points.push( this.q );
         }
-        console.log("GETPLOTRANGE POINTS4:", points)
 
         return $.ec.modk.Base.prototype.getPlotRange.call( this, points );
     };

@@ -145,9 +145,12 @@ main #form .parameters .parameter input {
 }
 
 path { 
-  stroke: steelblue;
-  stroke-width: 2;
+  stroke-width: 3;
   fill: none;
+}
+
+.steelblue {
+  stroke: steelblue;
 }
 
 .axis path,
@@ -194,4 +197,12 @@ path.redLine {
 
 nav>ul>li>a {
   cursor: pointer;
+}
+
+circle {
+  stroke-width: 3;
+}
+
+#plot {
+  display: none;
 }
