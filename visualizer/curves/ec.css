@@ -177,6 +177,16 @@ path {
   stroke-width:3;
 }
 
+path.yellowLine {
+  stroke: #edd078;
+  stroke-width:3;
+}
+
+path.redLine {
+  stroke: #dd6767;
+  stroke-width:3;
+}
+
 #plotArea {
   margin-right: 2em;
   margin-left: 2em;

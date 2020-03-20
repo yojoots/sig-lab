@@ -286,7 +286,6 @@
             var xMargin = 0;
             var yMargin = 0;
         }
-        console.log("GETPLOTRANGE POINTS7:")
 
         return {
             xMin: xMin - xMargin, xMax: xMax + xMargin,
@@ -935,8 +934,6 @@
             points.push([ this.r[ 0 ], -this.r[ 1 ] ]);
         }
 
-        console.log("GETPLOTRANGE POINTS1:", points)
-
         return $.ec.reals.Base.prototype.getPlotRange.call( this, points );
     };
 
@@ -968,6 +965,75 @@
             data: [ this.p, this.q ],
             points: { show: true, radius: 5 }
         });
+
+        var rPoint = [this.r[ 0 ], -this.r[ 1 ]];
+
+        // Begin our non-intrusive d3 drawing
+        if (typeof d3 !== 'undefined') {
+            var rangePoints = this.getPlotRange();
+            var points = linePoints;
+            var pointsOnOpenPortion = points;
+            var pointsOnClosedPortion = [];
+
+            if (points.indexOf(null) > 0) {
+                pointsOnClosedPortion = points.slice(0, points.indexOf(null));
+                pointsOnOpenPortion = points.slice(points.indexOf(null)+1);
+            }
+
+            // Set the dimensions of the canvas / graph
+            var margin = {top: 10, right: 2, bottom: 20, left: 20},
+            width = 600 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+            // Set the ranges
+            var x = d3.scaleLinear().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            // Adds the svg canvas
+            //var svg = d3.select("main")
+            var svg = d3.select("#plotArea")
+                .select("svg")
+                .select("g");
+
+            // Scale the range of the data
+            x.domain([rangePoints.xMin, rangePoints.xMax]);
+            y.domain([rangePoints.yMin, rangePoints.yMax]);
+
+            // Line-drawing helper function
+            var valueline = d3.line()
+                .x(function(d) { return x(d[0]); })
+                .y(function(d) { return y(d[1]); });
+
+            // (clipped) Chart body
+            chartBody = svg.append("g")
+                .attr("clip-path", "url(#clip)");
+
+            // Draw the line
+            chartBody.append("path")
+                .data([[[rPoint[0], rPoint[1]], [rPoint[0], -rPoint[1]]]])
+                .attr("class", "line redLine")
+                .attr("d", d3.line()
+                .x(function(d) { return x(d[0]); })
+                .y(function(d) { return y(d[1]); }));
+
+            // Draw the line
+            chartBody.append("path")
+                .data([pointsOnOpenPortion])
+                .attr("class", "line yellowLine")
+                .attr("d", d3.line()
+                .x(function(d) { return x(d[0]); })
+                .y(function(d) { return y(d[1]); }));
+
+
+            // Add the explicit visual points (P and Q)
+            var myDots = chartBody.selectAll("dot")
+            .data([{"date": this.pxInput.val(), "close": this.pyInput.val(), "color": "#edd078"}, {"date": this.qxInput.val(), "close": this.qyInput.val(), "color": "#edd078"}, {"date": rPoint[0], "close": -rPoint[1], "color": "#dd6767"}])
+            .enter().append("circle")
+            .attr("r", 5)
+            .style("fill", function(d){ return d.color; })
+            .attr("cx", function(d) { return x(d.date); })
+            .attr("cy", function(d) { return y(d.close); });
+        }
 
         return data;
     };
@@ -1055,7 +1121,6 @@
         if( this.q !== null ) {
             points.push( this.q );
         }
-        console.log("GETPLOTRANGE POINTS2:", points)
 
         return $.ec.reals.Base.prototype.getPlotRange.call( this, points );
     };
@@ -1292,7 +1357,6 @@
 
         points.push([ 0, 0 ]);
         points.push([ this.k - 1, this.k - 1 ]);
-        console.log("GETPLOTRANGE POINTS3:", points)
 
         return $.ec.Base.prototype.getPlotRange.call( this, points );
     };
