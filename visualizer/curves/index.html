@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Elliptic Curve scalar multiplication (&#8477;)</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.flot.js"></script>
+    <script type="text/javascript" src="../js/ec.js"></script>
+    <script type="text/javascript" src="../js/d3.v4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic&#038;subset=latin%2Clatin-ext">
+    <link rel="stylesheet" type="text/css" href="ec.css">
+  </head>
+  <body>
+    <header>
+      <h1 id="page-header">Elliptic Curve scalar multiplication (&#8477;)</h1>
+      <nav>
+        <ul>
+          <li class="field">&#8477;</li>
+          <li><a id="header-addr" onclick="toggleToRealAddition()">Addition</a></li>
+          <li><a id="header-multr" onclick="toggleToRealMultiplication()">Multiplication (d3)</a></li>
+          <li class="field">&#120125;<sub>p</sub></li>
+          <li><a id="header-addf" onclick="toggleToModAddition()">Addition</a></li>
+          <li><a id="header-multf" onclick="toggleToModMultiplication()">Multiplication</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="plot" class="box"></div>
+      <div id="plotArea" class="box"></div>
+      <div class="box">
+        <div id="form">
+          <div id="curve-coefficients" class="parameters">
+            <p>Curve:</p>
+            <div class="parameter curve-coefficient"><label for="coefficient-a">a</label><input id="coefficient-a" name="a" value="-7" type="number" step="any"></div>
+            <div class="parameter curve-coefficient"><label for="coefficient-b">b</label><input id="coefficient-b" name="b" value="10" type="number" step="any"></div>
+          </div>
+          <div id="field-coefficients" class="parameters">
+            <p>Field:</p>
+            <div class="parameter curve-coefficient"><label for="coefficient-p">p</label><input id="coefficient-p" name="p" value="97" type="number" step="1"></div>
+            <div class="placeholder"></div>
+          </div>
+          <div id="scalars" class="parameters">
+            <p><em>n</em>:</p>
+            <div class="parameter multiplication-factor"><label for="scalar-n">n</label><input id="scalar-n" name="n" value="2" type="number" step="1" min="1" max="99999"></div>
+            <div class="placeholder"></div>
+          </div>
+          <div id="point-p-coordinates" class="parameters">
+            <p><em>P</em>:</p>
+            <div class="parameter point-coordinate"><label for="point-p-x">x</label><input id="point-p-x" name="px" value="1" type="number" step="any"></div>
+            <div class="parameter point-coordinate"><label for="point-p-y">y</label><input id="point-p-y" name="py" value="2" type="number" step="any"></div>
+          </div>
+          <div id="point-q-coordinates" class="parameters">
+            <p><em>Q</em>:</p>
+            <div class="parameter point-coordinate"><label for="point-q-x">x</label><input id="point-q-x" name="qx" value="3" type="number" step="any"></div>
+            <div class="parameter point-coordinate"><label for="point-q-y">y</label><input id="point-q-y" name="qy" value="4" type="number" step="any"></div>
+          </div>
+          <div id="point-qq-coordinates" class="parameters">
+            <p><em>Q</em> = <em>n</em> &middot; <em>P</em>:</p>
+            <div class="parameter point-coordinate result"><label for="point-q-x">x</label><input id="point-q-x" name="qx" step="any" readonly></div>
+            <div class="parameter point-coordinate result"><label for="point-q-y">y</label><input id="point-q-y" name="qy" step="any" readonly></div>
+          </div>
+          <div id="point-r-coordinates" class="parameters">
+            <p><em>R</em> = <em>P</em> + <em>Q</em></span>:</p>
+            <div class="parameter point-coordinate result"><label for="point-r-x">x</label><input id="point-r-x" name="rx" step="any" readonly></div>
+            <div class="parameter point-coordinate result"><label for="point-r-y">y</label><input id="point-r-y" name="ry" step="any" readonly></div>
+          </div>
+        </div>
+        <div id="summary">
+          <p id="summary-ar">Point addition over the elliptic curve <span class="curve-equation"></span> in &#8477;.</p>
+          <p id="summary-mr">Scalar multiplication over the elliptic curve <span class="curve-equation"></span> in &#8477;.</p>
+          <p class="curve-singular-warning"><strong>Warning:</strong> this curve is singular.</p>
+          <div id="summary-mk">
+            <p>Scalar multiplication over the elliptic curve <span class="curve-equation"></span> in &#120125;<sub class="field-order"></sub>.</p>
+            <p>The curve has <span class="curve-order"></span> points (including the point at infinity).</p>
+            <p>The subgroup generated by <em>P</em> has <span class="subgroup-order"></span> points.</p>
+            <p class="curve-singular-warning"><strong>Warning:</strong> this curve is singular.</p>
+            <p class="composite-warning"><strong>Warning:</strong> <em>p</em> is not a prime.</p>
+          </div>
+          <div id="summary-ak">
+            <p>Point addition over the elliptic curve <span class="curve-equation"></span> in &#120125;<sub class="field-order"></sub>.</p>
+            <p>The curve has <span class="curve-order"></span> points (including the point at infinity).</p>
+            <p class="curve-singular-warning"><strong>Warning:</strong> this curve is singular.</p>
+            <p class="composite-warning"><strong>Warning:</strong> <em>p</em> is not a prime.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>The credit for most of this tool goes to Andrea Corbellini, who built it for <a href="http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/">this excellent walkthrough</a>.</p>
+      <p>It's free software, released under the <a href="http://opensource.org/licenses/MIT">MIT license</a> and available on <a href="https://github.com/yojoots/sig-lab">GitHub</a>.</p>
+    </footer>
+    <script type="text/javascript">
+        var toggleToRealMultiplication = function () {
+          $("#page-header").html("Elliptic Curve scalar multiplication (&#8477;)");
+          $("nav>ul>li>a").removeClass("active");
+          $("#header-multr").addClass("active");
+          $("#scalars").show();
+
+          $("#summary-mr").show();
+          $("#point-p-coordinates").show();
+          $("#point-qq-coordinates").show();
+
+          $("#field-coefficients").hide();
+          $("#point-q-coordinates").hide();
+          $("#point-r-coordinates").hide();
+          $("#summary-ar").hide();
+          $("#summary-ak").hide();
+          $("#summary-mk").hide();
+          
+
+          $(function() {
+              $.ec.curve = new $.ec.reals.ScalarMultiplication();
+          });
+        }
+
+        var toggleToRealAddition = function () {
+          $(function() {
+            $("#page-header").html("Elliptic Curve point addition (&#8477;)");
+            $("nav>ul>li>a").removeClass("active");
+            $("#header-addr").addClass("active")
+            $("#summary-ar").show();
+            $("#point-p-coordinates").show();
+            $("#point-q-coordinates").show();
+            $("#point-r-coordinates").show();
+
+            $("#field-coefficients").hide();
+            $("#point-qq-coordinates").hide();
+            $("#summary-mr").hide();
+            $("#summary-ak").hide();
+            $("#summary-mk").hide();
+            $("#scalars").hide();
+
+            $.ec.curve = new $.ec.reals.PointAddition();
+          });
+        }
+
+        var toggleToModAddition = function () {
+          $("#page-header").html("Elliptic Curve point addition (&#120125;<sub>p</sub>)");
+          $("nav>ul>li>a").removeClass("active");
+          $("#header-addf").addClass("active")
+
+          $("#field-coefficients").show();
+          $("#summary-ak").show();
+          $("#point-q-coordinates").show();
+          $("#point-r-coordinates").show();
+
+          $("#point-qq-coordinates").hide();
+          $("#summary-ar").hide();
+          $("#summary-mk").hide();
+          $("#summary-mr").hide();
+          $("#scalars").hide();
+
+          $(function() {
+              $.ec.curve = new $.ec.modk.PointAddition();
+          });
+        }
+
+        var toggleToModMultiplication = function () {
+          $("#page-header").html("Elliptic Curve scalar multiplication (&#120125;<sub>p</sub>)");
+          $("nav>ul>li>a").removeClass("active");
+          $("#header-multf").addClass("active")
+
+          $("#field-coefficients").show();
+          $("#summary-mk").show();
+          $("#point-p-coordinates").show();
+          $("#scalars").show();
+          $("#point-qq-coordinates").show();
+
+          $("#summary-ar").hide();
+          $("#summary-ak").hide();
+          $("#point-q-coordinates").hide();
+          $("#point-r-coordinates").hide();
+
+          $(function() {
+              $.ec.curve = new $.ec.modk.ScalarMultiplication();
+          });
+        }
+
+        toggleToRealMultiplication();
+    </script>
+  </body>
+</html>

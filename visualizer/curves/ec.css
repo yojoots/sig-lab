@@ -179,4 +179,9 @@ path {
 
 #plotArea {
   margin-right: 2em;
+  margin-left: 2em;
+}
+
+nav>ul>li>a {
+  cursor: pointer;
 }
