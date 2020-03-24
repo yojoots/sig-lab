@@ -3,6 +3,9 @@
     <title>SigLab: Visualizer</title>
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 	<script src="js/d3.v4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jsbn.js"></script>
+<script type="text/javascript" src="js/jsbn2.js"></script>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic&#038;subset=latin%2Clatin-ext">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -17,22 +20,37 @@
 <form action="#">
 <h2>Outputs</h2>
   <p>
-    <input type="checkbox" id="hexCheck" checked="checked" />
+    <input type="checkbox" id="hexCheck" checked="checked" data-id="hexDiv"  />
     <label for="hexCheck">Hex</label>
   </p>
   <p>
-    <input type="checkbox" id="binaryCheck" checked="checked" />
+    <input type="checkbox" id="binaryCheck" checked="checked" data-id="binaryDiv" />
     <label for="binaryCheck">Binary</label>
   </p>
+  <p>
+    <input type="checkbox" id="base64Check" data-id="base64Div" />
+    <label for="base64Check">Base64</label>
+  </p>
+  <!--<p>
+    <input type="checkbox" id="base58Check" data-id="base58Div" />
+    <label for="base58Check">Base58</label>
+  </p>-->
 </form>
 </div>
 <div id="container">
     <h1>Key Visualizer</h1>
     <button id="randomizeButton" onclick="randomize()">Randomize</button>
     <div id="grid"></div>
-    <label><b>Hex:</b></label><div id="hexKey">0000000000000000000000000000000000000000000000000000000000000000</div>
-    <br>
-    <label><b>Binary:</b></label><div id="binKey">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div>
+    <div id="hexDiv" class="byteView">
+    <label><b>Hex:</b></label><div id="hexKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000</div>
+    </div>
+    <div id="binaryDiv" class="byteView">
+    <label><b>Binary:</b></label><div id="binKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div>
+    </div>
+    <div id="base64Div" style="display: none;" class="byteView">
+    <label><b>Base64:</b></label><div id="base64Key" class="keyOutput">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</div>
+    </div>
+
     <div id="snackbar" class="auto">
     <span class="closebtn snackclose" onclick="this.parentElement.style.display='none';">&times;</span> 
     <h2>Warning!</h2> This is for educational purposes only. Please do not actually use this as anything more than a toy or learning tool.
@@ -53,5 +71,14 @@ function closeNav() {
   document.getElementById("container").style.marginRight = "0";
 }
 openNav();
+
+$(document).ready(function(){
+    $("input[type=checkbox]").change(function(){
+        if(this.checked)
+            $(`#${$(this).attr("data-id")}`).fadeIn('fast');
+        else
+            $(`#${$(this).attr("data-id")}`).fadeOut('fast');
+    });
+});
 </script>
 </html>

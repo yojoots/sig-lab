@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Elliptic Curve scalar multiplication (&#8477;)</title>
+    <title>Elliptic Curve Playground</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon2.png"/>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.flot.js"></script>
     <script type="text/javascript" src="js/ec.js"></script>
@@ -12,9 +13,9 @@
   </head>
   <body>
   
-    <header>
+    <header >
       <button class="openbtn" onclick="openNav()">&#9776;</button>
-
+      <div id="hmain">
       <h1 id="page-header">Elliptic Curve scalar multiplication</h1>
       <h1 id="num-type">(&#8477;)</h1>
       
@@ -28,7 +29,7 @@
           <li><a id="header-multf" onclick="toggleToModMultiplication()">Multiplication</a></li>
         </ul>
       </nav>
-
+      </div>
     </header>
 <div id="sidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#187;</a>
@@ -36,7 +37,7 @@
   <a href="index.html">Keys</a>
 <br><br><br>
 </div>
-    <main>
+    <main id="main">
       <div id="plot" class="box"></div>
       <div id="plotArea" class="box"></div>
       <div class="box">
@@ -97,7 +98,7 @@
         </div>
       </div>
     </main>
-    <footer>
+    <footer id="footer">
       <p>Credit for much of the guts here goes to Andrea Corbellini, who wrote <a href="http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/">this excellent walkthrough</a>.</p>
       <p>Everything you see is <a href="http://opensource.org/licenses/MIT">free software</a> available on <a href="https://github.com/yojoots/sig-lab">GitHub</a>.</p>
     </footer>
@@ -196,11 +197,13 @@
 
 function openNav() {
   document.getElementById("sidebar").style.width = "250px";
+  document.getElementById("hmain").style.marginRight = "250px";
   document.getElementById("main").style.marginRight = "250px";
 }
 
 function closeNav() {
   document.getElementById("sidebar").style.width = "0";
+  document.getElementById("hmain").style.marginRight = "0";
   document.getElementById("main").style.marginRight = "0";
 }
 </script>

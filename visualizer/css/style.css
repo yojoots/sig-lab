@@ -4,7 +4,7 @@
     margin-top: 1em;
 }
 
-#hexKey, #binKey {
+.keyOutput {
     font-size: 15px;
     font-family: monospace;
     max-width: 580px;
@@ -17,7 +17,7 @@ h1 {
 
 
 button {
-    background-color: #4CAF50;
+    background-color: #06940b;
     border: 1px solid #1b4d75;
     border-radius: 2px;
     color: white;
@@ -33,6 +33,7 @@ button {
 
 button:hover {
     background-color: #2b902f;
+    background-color: #147518;
 }
 
 /* The sidebar menu */
@@ -92,23 +93,25 @@ button:hover {
   top: 2.5em;
   font-size: 20px;
   cursor: pointer;
-  background-color: #111;
-  background-color: #000000c4;
+  /*background-color: #111;
+  background-color: #000000c4;*/
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
 }
-
+/*
 .openbtn:hover {
   background-color: #444;
   background-color: #000;
 }
-
+*/
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s; /* If you want a transition effect */
   padding: 20px;
+
+  padding-top: 30px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -348,6 +351,11 @@ form {
   
   a {
     color: #a84646;
+    color: #46a880;
+  }
+
+  a:hover {
+    color: #7cffca;
   }
   
   header a {
@@ -416,7 +424,7 @@ form {
   main {
     padding: 26px 0;
     text-align: center;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
   }
   
   label {
@@ -564,3 +572,55 @@ form {
     background-image: linear-gradient(to bottom right, #000000b5, #000401d6);
     color: #ffeaea;
   }
+
+
+  footer {
+    background-color: #040404eb;
+    color: whitesmoke;
+    padding-bottom: 1.2em;
+    margin-top: 60px;
+  }
+
+  #footer {
+    position: absolute;
+    max-width: 100%;
+    height: 7rem;
+    min-width: -webkit-fill-available;
+
+
+  }
+
+.site-footer {
+    width:100%;
+    height:7rem;
+}
+
+.footertrans {
+    background: rgba(0,0,0,0.6);
+    height: 12rem;
+}
+
+  .site-footer {
+    position: relative;
+    z-index: 8;
+    /*background: rgba(0,0,0,0.6);*/
+    padding: 40px 0;
+    margin-top: 60px;
+}
+
+
+
+.content-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.byteView {
+    margin-bottom:20px;
+}

@@ -60,6 +60,11 @@ function populateGrid() {
         });
 }
 
+function hexToBase64(hexstring) {
+    return btoa(hexstring.match(/\w{2}/g).map(function(a) {
+        return String.fromCharCode(parseInt(a, 16));
+    }).join(""));
+}
 
 function updateKey() {
     let binaryString = "";
@@ -70,6 +75,8 @@ function updateKey() {
     }
     document.getElementById("hexKey").innerText = hexString;
     document.getElementById("binKey").innerText = binaryString;
+
+    document.getElementById("base64Key").innerText = hexToBase64(hexString);
 }
 
 function randomize() {
