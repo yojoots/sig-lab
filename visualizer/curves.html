@@ -34,29 +34,7 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#187;</a>
   <a href="#">About</a>
   <a href="index.html">Keys</a>
-  <!--<a href="#">Clients</a>
-  <a href="#">Contact</a>-->
 <br><br><br>
-<!--
-<form action="#">
-  <p>
-    <input type="checkbox" id="test1" />
-    <label for="test1">Red</label>
-  </p>
-  <p>
-    <input type="checkbox" id="test2" checked="checked" />
-    <label for="test2">Yellow</label>
-  </p>
-  
-  <p>
-    <input type="checkbox" id="test3" checked="checked" disabled="disabled" />
-    <label for="test3">Green</label>
-  </p>
-    <p>
-      <input type="checkbox" id="test4" disabled="disabled" />
-      <label for="test4">Brown</label>
-  </p>
-</form>-->
 </div>
     <main>
       <div id="plot" class="box"></div>
@@ -126,7 +104,7 @@
     <script type="text/javascript">
         var toggleToRealMultiplication = function () {
           $("#page-header").html("Elliptic Curve scalar multiplication");
-          $("#num-type").html("&#8477;");
+          $("#num-type").html("&#8477;<sub style='visibility: hidden;'>p</sub>");
           $("nav>ul>li>a").removeClass("active");
           $("#header-multr").addClass("active");
           $("#scalars").show();
@@ -151,7 +129,7 @@
         var toggleToRealAddition = function () {
           $(function() {
             $("#page-header").html("Elliptic Curve point addition");
-            $("#num-type").html("&#8477;");
+            $("#num-type").html("&#8477;<sub style='visibility: hidden;'>p</sub>");
             $("nav>ul>li>a").removeClass("active");
             $("#header-addr").addClass("active")
             $("#summary-ar").show();
@@ -215,20 +193,16 @@
         }
 
         toggleToRealMultiplication();
-    </script>
-  <script>
-/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+
 function openNav() {
   document.getElementById("sidebar").style.width = "250px";
   document.getElementById("main").style.marginRight = "250px";
 }
 
-/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
 function closeNav() {
   document.getElementById("sidebar").style.width = "0";
   document.getElementById("main").style.marginRight = "0";
 }
-
 </script>
   </body>
 </html>

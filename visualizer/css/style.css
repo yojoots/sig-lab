@@ -93,13 +93,16 @@ button:hover {
   font-size: 20px;
   cursor: pointer;
   background-color: #111;
+  background-color: #000000c4;
   color: white;
   padding: 10px 15px;
   border: none;
+  border-radius: 5px;
 }
 
 .openbtn:hover {
   background-color: #444;
+  background-color: #000;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -301,6 +304,9 @@ form {
     transition: 0.3s;
     padding-left: 3px;
     padding-right: 3px;
+
+    padding-right: 5px;
+    padding-bottom: 3px;
     margin-top: 5px;
 
     margin-top: 8px;
@@ -344,14 +350,21 @@ form {
     color: #a84646;
   }
   
+  header a {
+    font-weight: bold;
+    color: #12f1be;
+  }
+
   header {
-    padding-bottom: 10px;
+    padding-bottom: 1.2em;
+    text-shadow: 1px 1px #000000;
+
+    padding-top: 1em;
     text-align: center;
   }
   
   header h1 {
-    color: #000000;
-    margin: 0;
+    color: #f1fdff;
   }
   
   header nav ul {
@@ -385,15 +398,23 @@ form {
   header nav ul li a.active {
     font-weight: 900;
     color: #000000;
+    font-weight: bolder;
+    color: #18ff61;
+    color: #caffdb;
+    color: #bcf2ff;
+    padding-bottom:12px;
   }
   
+  #num-type {
+      margin:0.3em;
+  }
   footer {
     padding: 20px 60px;
     font-size: 18px;
   }
   
   main {
-    padding: 20px 0;
+    padding: 26px 0;
     text-align: center;
     background-color: #ffffff;
   }
@@ -535,4 +556,11 @@ form {
   p {
    padding-top: 10px;
    margin-left: 5px;
+  }
+
+  header {
+    background-color: #6489c1;
+    background-image: linear-gradient(to bottom right, #1ca74db5, #002229d6);
+    background-image: linear-gradient(to bottom right, #000000b5, #000401d6);
+    color: #ffeaea;
   }
