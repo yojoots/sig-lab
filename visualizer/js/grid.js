@@ -83,7 +83,13 @@ function randomize() {
             keyData[(i*32 + j)].value = (randomRawInt[j] === '1');
           }
       }
-      populateGrid();
+
+      d3.selectAll("rect").data(keyData).transition()
+        .style("fill", function(d) {
+            if (d.value) { return "black" }
+            else { return "#fff" };
+        });
+
       updateKey();
 
     } else { throw new Error("Your browser can't generate secure random numbers"); }
