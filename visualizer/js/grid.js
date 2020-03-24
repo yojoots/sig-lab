@@ -95,6 +95,7 @@ function randomize() {
     } else { throw new Error("Your browser can't generate secure random numbers"); }
 }
 
+
 window.onload = function() {
     populateGrid();
 };
