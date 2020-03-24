@@ -12,3 +12,23 @@
 h1 {
     margin-bottom:1px;
 }
+
+
+button {
+    background-color: #4CAF50;
+    border: 1px solid #1b4d75;
+    border-radius: 2px;
+    color: white;
+    padding: 0.5em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: -2em;
+    margin-left: 29em;
+}
+
+button:hover {
+    background-color: #2b902f;
+}
