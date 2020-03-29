@@ -41,7 +41,7 @@ button:hover {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 3; /* Stay on top */
   top: 0;
   right: 0;
   background-color: #111; /* Black*/
@@ -212,30 +212,15 @@ form {
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 250px; /* Set a default minimum width */
     margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: #333; /* Black background color */
-    color: #fff; /* White text color */
-    text-align: center; /* Centered text */
-    border-radius: 2px; /* Rounded borders */
-    padding: 16px; /* Padding */
-    position: fixed; /* Sit on top of the screen */
-    z-index: 1; /* Add a z-index if needed */
-    left: 50%; /* Center the snackbar */
-    bottom: 30px; /* 30px from the bottom */
     padding: 20px;
-    background-color: #f44336;
-    color: white;
-
     visibility: hidden;
-    /* min-width: 250px; */
     min-width: 80%;
-    /* margin-left: -125px; */
     background-color: #333;
-    color: #fff;
     text-align: center;
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     left: 10%;
     bottom: 50px;
     background-color: #f44336;
@@ -574,19 +559,12 @@ form {
   }
 
 
-  footer {
-    background-color: #040404eb;
-    color: whitesmoke;
-    padding-bottom: 1.2em;
-    margin-top: 60px;
-  }
 
   #footer {
     position: absolute;
     max-width: 100%;
     height: 7rem;
     min-width: -webkit-fill-available;
-
 
   }
 
@@ -597,18 +575,20 @@ form {
 
 .footertrans {
     background: rgba(0,0,0,0.6);
-    height: 12rem;
+    height: 10rem;
 }
 
   .site-footer {
     position: relative;
-    z-index: 8;
+    z-index: 2;
     /*background: rgba(0,0,0,0.6);*/
     padding: 40px 0;
     margin-top: 60px;
 }
 
-
+#content-wrap {
+  padding-bottom: 2em;
+}
 
 .content-bg {
     position: fixed;
@@ -623,4 +603,104 @@ form {
 
 .byteView {
     margin-bottom:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#homelink {
+  position: absolute;
+  bottom: 2.6em;
+  right: 0;
+}
+
+#homelink>a {
+  font-size: 55px;
+  border-bottom:none;
+}
+
+#homelink>a:hover {
+  color: #0cfeb2;
+}
+
+.bg-overlay {
+  background: #fdf7f7;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1
+}
+
+
+.content-bg {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  /*background-image: url(../images/bg.jpg);*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  bottom: -1em;
+  width: 100%;
+  height: 0.6rem;
+}
+
+.site-footer {
+  width: 100%;
+  height: 0.6rem
+}
+
+.footertrans {
+  background: rgba(2, 25, 58, 0.9);
+
+  background-color: #040404eb;
+  color: whitesmoke;
+  padding-bottom: 1.2em;
+  margin-top: 60px;
+  text-align: center;
+}
+
+
+.copyright-text {
+  font-size: 12px;
+  font-family: monospace
+}
+
+.copyright-text span {
+  margin: 1.5em;
+  margin-top: .2em
+}
+
+.copyright-text a {
+  color: #bfbfbf
+}
+
+.ptop {
+  padding-top: 1em;
+  margin-top: 10px;
 }

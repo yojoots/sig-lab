@@ -10,9 +10,13 @@
     <script type="text/javascript" src="js/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic&#038;subset=latin%2Clatin-ext">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
   </head>
   <body>
   
+ <div id="page-container">
+   <div id="content-wrap">
     <header >
       <button class="openbtn" onclick="openNav()">&#9776;</button>
       <div id="hmain">
@@ -23,7 +27,7 @@
         <ul>
           <li class="field">&#8477;</li>
           <li><a id="header-addr" onclick="toggleToRealAddition()">Addition</a></li>
-          <li><a id="header-multr" onclick="toggleToRealMultiplication()">Multiplication (d3)</a></li>
+          <li><a id="header-multr" onclick="toggleToRealMultiplication()">Multiplication</a></li>
           <li class="field">&#120125;<sub>p</sub></li>
           <li><a id="header-addf" onclick="toggleToModAddition()">Addition</a></li>
           <li><a id="header-multf" onclick="toggleToModMultiplication()">Multiplication</a></li>
@@ -36,6 +40,7 @@
   <a href="https://github.com/yojoots/sig-lab/tree/master/visualizer#visualizer-tools">GitHub</a>
   <a href="index.html">Keys</a>
 <br><br><br>
+<b id="homelink"><a href="https://hanneman.org"><i class="fa fa-home"></i></a></b>
 </div>
     <main id="main">
       <div id="plot" class="box"></div>
@@ -98,10 +103,34 @@
         </div>
       </div>
     </main>
-    <footer id="footer">
+
+   </div>
+   <footer id="footer" class="site-footer">
+   <div class="footertrans">
+    <div class="container ft2">
+        <div class="row" style="margin-top: 1.5em;">
+            <div class="col-md-12 text-center">
+                <div class="social-icons">
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row" id="footerrow">
+            <div class="col-md-12 text-center ptop">
       <p>Credit for much of the guts here goes to Andrea Corbellini, who wrote <a href="http://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/">this excellent walkthrough</a>.</p>
       <p>Everything you see is <a href="http://opensource.org/licenses/MIT">free software</a> available on <a href="https://github.com/yojoots/sig-lab/tree/master/visualizer#visualizer-tools">GitHub</a>.</p>
+<br>
+                      <p class="copyright-text"><span class="copyleft">&copy;</span><span>Justin Hanneman</span><span class="copyleft">&copy;</span><!--&copy;--></p>
+
+            </div>
+        </div>
+    </div>
+    </div>
     </footer>
+ </div>
+
+
     <script type="text/javascript">
         var toggleToRealMultiplication = function () {
           $("#page-header").html("Elliptic Curve scalar multiplication");
@@ -199,12 +228,14 @@ function openNav() {
   document.getElementById("sidebar").style.width = "250px";
   document.getElementById("hmain").style.marginRight = "250px";
   document.getElementById("main").style.marginRight = "250px";
+  document.getElementById("footerrow").style.marginRight = "250px";
 }
 
 function closeNav() {
   document.getElementById("sidebar").style.width = "0";
   document.getElementById("hmain").style.marginRight = "0";
   document.getElementById("main").style.marginRight = "0";
+  document.getElementById("footerrow").style.marginRight = "0";
 }
 </script>
   </body>
