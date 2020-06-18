@@ -71,6 +71,11 @@ function hexToBase58(hexString) {
     return bs58.encode(bytes)
 }
 
+function hexToBase58Check(hexString) {
+    const bytes = hexToBytes(hexString, 'hex')
+    return b58c.getName(bytes)
+}
+
 function hexToBase64(hexString) {
     return btoa(hexString.match(/\w{2}/g).map(function(a) {
         return String.fromCharCode(parseInt(a, 16));
@@ -89,6 +94,7 @@ function updateKey(binaryString = "") {
     document.getElementById("binKey").innerText = binaryString;
     document.getElementById("base64Key").innerText = hexToBase64(hexString);
     document.getElementById("base58Key").innerText = hexToBase58(hexString);
+    document.getElementById("base58CheckKey").innerText = hexToBase58Check(hexString);
     //$('div.keyOutput').trigger("DOMSubtreeModified");
 }
 
