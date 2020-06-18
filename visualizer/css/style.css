@@ -9,6 +9,13 @@
     font-family: monospace;
     max-width: 580px;
     overflow-wrap: break-word;
+    margin-bottom: 2px;
+    /*min-width: 580px;*/
+}
+
+textarea.keyOutput {
+  display: none;
+  width: 580px;
 }
 
 h1 {
@@ -21,14 +28,12 @@ button {
     border: 1px solid #1b4d75;
     border-radius: 2px;
     color: white;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.8em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    margin-top: -2em;
-    margin-left: 29em;
 }
 
 button:hover {
@@ -74,6 +79,7 @@ button:hover {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  font-family: sans-serif;
 }
 
 .sidebar h1, h2, h3, h4 {
@@ -99,6 +105,7 @@ button:hover {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  margin-top: -2em;
 }
 /*
 .openbtn:hover {
@@ -151,8 +158,9 @@ button:hover {
 [type="checkbox"]:checked + label:after {
   content: '\2713\0020';
   position: absolute;
-  top: .15em; left: .22em;
-  font-size: 1.3em;
+  top: 1px;
+  left: 1px;
+  font-size: 1.7em;
   line-height: 0.8;
   color: #09ad7e;
   transition: all .2s;
@@ -205,8 +213,6 @@ form {
     margin-left:1em;
 }
 
-
-
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
@@ -234,54 +240,53 @@ form {
     padding-top: 1px;
 
     margin-right: 15%;
-  }
+}
   
-  /* Show the snackbar when clicking on a button (class added with JavaScript) */
-  #snackbar.show {
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
     visibility: visible; /* Show the snackbar */
     /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
     However, delay the fade out process for 2.5 seconds */
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
+}
 
-  #snackbar.auto {
+#snackbar.auto {
     visibility: visible; /* Show the snackbar */
-  }
+}
 
-  #snackbar h2 {
+#snackbar h2 {
       color:white;
     text-shadow: 3px 3px #000000;
-  }
+}
 
-
-  #snackbar a {
+#snackbar a {
     color: #00ffae;
-  }
+}
   
-  /* Animations to fade the snackbar in and out */
-  @-webkit-keyframes fadein {
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
-  }
+}
   
-  @keyframes fadein {
+@keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
-  }
+}
   
-  @-webkit-keyframes fadeout {
+@-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
-  }
+}
   
-  @keyframes fadeout {
+@keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
-  }
+}
 
 
-  .closebtn {
+.closebtn {
     margin-left: 15px;
     color: white;
     font-weight: bold;
@@ -298,275 +303,289 @@ form {
     margin-top: 5px;
 
     margin-top: 8px;
-    margin-right: -8px;
-  }
+    margin-right: -16px;
+}
   
-  .closebtn:hover {
+.closebtn:hover {
     color: white;
-  }
+}
 
-  .snackclose:hover {
+.snackclose {
+    margin-right: -8px;
+}
+
+.snackclose:hover {
     background: #ca2424;
-  }
+}
 
-  #randomizeButton {
-    margin-top: -2.5em;
-  }
-
-
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  html, body {
-    min-width: 600px;
-    background-color: #f0f0f0;
-  }
-  
-  html, body, input {
-    color: #000000;
-    font-size: 1.125rem;
-    font-family: "Source Sans Pro", sans-serif;
-  }
-  
-  input {
-    line-height: 1.5;
-  }
-  
-  a {
-    color: #a84646;
-    color: #46a880;
-  }
-
-  a:hover {
-    color: #7cffca;
-  }
-  
-  header a {
-    font-weight: bold;
-    color: #12f1be;
-  }
-
-  header {
-    padding-bottom: 1.2em;
-    text-shadow: 1px 1px #000000;
-
-    padding-top: 1em;
-    text-align: center;
-  }
-  
-  header h1 {
-    color: #f1fdff;
-  }
-  
-  header nav ul {
-    list-style: none;
-    font-size: .9em;
-    padding: 0;
-  }
-  
-  header nav ul li {
-    display: inline;
-    margin: 8px;
-  }
-  
-  header nav ul li.field {
-    margin-left: 32px;
-  }
-  
-  header nav ul li:first-child {
-    margin-left: 0;
-  }
-  
-  header nav ul li:last-child {
-    margin-right: 0;
-  }
-  
-  header nav ul li a {
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  
-  header nav ul li a.active {
-    font-weight: 900;
-    color: #000000;
-    font-weight: bolder;
-    color: #18ff61;
-    color: #caffdb;
-    color: #bcf2ff;
-    padding-bottom:12px;
-  }
-  
-  #num-type {
-      margin:0.3em;
-  }
-  footer {
-    padding: 20px 60px;
-    font-size: 18px;
-  }
-  
-  main {
-    padding: 26px 0;
-    text-align: center;
-    /*background-color: #ffffff;*/
-  }
-  
-  label {
-    color: #000000;
-  }
-  
-  main .box {
+.mainButtonsDiv {
     display: inline-block;
-    vertical-align: top;
-    text-align: left;
-  }
-  
-  main #plot {
-    width: 600px;
-    height: 600px;
-  }
-  
-  main #form {
-    margin: 2em 1em 0 1em;
-  }
-  
-  main #summary {
-    margin: .7em .35em 0 .35em;
-  }
-  
-  main #form .parameters p {
-    display: inline-block;
-    margin: 7px 5px 7px 0;
-    text-align: right;
-    width: 6em;
-  }
-  
-  main #form .parameters .placeholder {
-    display: inline-block;
-    width: 5.8em;
-    margin: 0 24px 0 0;
-  }
-  
-  main #form .parameters .parameter {
-    display: inline-block;
-    border: 1px solid #a0a0a0;
-    border-radius: 3px;
-  }
-  
-  main #form .parameters .parameter.curve-coefficient {
-    background-color: #c2e0f8;
-  }
-  
-  main #form .parameters .parameter.point-coordinate,
-  main #form .parameters .parameter.multiplication-factor {
-    background-color: #edd078;
-  }
-  
-  main #form .parameters .parameter.result {
-    background-color: #dd6767;
-  }
-  
-  main #form .parameters .parameter label {
-    display: inline-block;
-    margin: 0 5px;
-    height: 100%;
-    width: 0.8em;
-    text-align: center;
-  }
-  
-  main #form .parameters .parameter input {
-    display: inline-block;
-    margin: 1px;
-    padding: 1px 5px;
-    width: 5em;
-    border: 0 none;
-  }
-  
-  path { 
-    stroke-width: 3;
-    fill: none;
-  }
-  
-  .steelblue {
-    stroke: steelblue;
-  }
-  
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    stroke-width:3;
-  
-    shape-rendering: crispEdges;
-  }
-  
-  
-  .domain { 
-    stroke: #545454;
-    stroke-width: 2;
-    fill: none;
-  }
-  
-  
-  .grayLine line {
-    stroke: #eaeaea;
-  }
-  
-  .blackLine path {
-    stroke: black;
-    stroke-width:3;
-  }
-  
-  path.yellowLine {
-    stroke: #edd078;
-    stroke-width:3;
-  }
-  
-  path.redLine {
-    stroke: #dd6767;
-    stroke-width:3;
-  }
-  
-  #plotArea {
-    margin-right: 2em;
-    margin-left: 2em;
-  }
-  
-  nav>ul>li>a {
-    cursor: pointer;
-  }
-  
-  circle {
-    stroke-width: 3;
-  }
-  
-  #plot {
-    display: none;
-  }
-  
-  p {
-   padding-top: 10px;
-   margin-left: 5px;
-  }
+}
 
-  header {
-    background-color: #6489c1;
-    background-image: linear-gradient(to bottom right, #1ca74db5, #002229d6);
-    background-image: linear-gradient(to bottom right, #000000b5, #000401d6);
-    color: #ffeaea;
-  }
+.mainButtonsDiv {
+    margin-bottom: 0.75em;
+}
+
+
+.copyleft {
+  display: inline-block;
+  transform: rotateY(180deg);
+  font-weight: 700;
+  font-family: sans-serif;
+}
 
 
 
-  #footer {
-    position: absolute;
-    max-width: 100%;
-    height: 7rem;
-    min-width: -webkit-fill-available;
 
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-width: 600px;
+  background-color: #f0f0f0;
+}
+
+html, body, input {
+  color: #000000;
+  font-size: 1.125rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+input {
+  line-height: 1.5;
+}
+
+a {
+  color: #a84646;
+  color: #46a880;
+}
+
+a:hover {
+  color: #7cffca;
+}
+
+header a {
+  font-weight: bold;
+  color: #12f1be;
+}
+
+header {
+  padding-bottom: 1.2em;
+  text-shadow: 1px 1px #000000;
+  padding-top: 1em;
+  text-align: center;
+}
+
+header h1 {
+  color: #f1fdff;
+}
+
+header nav ul {
+  list-style: none;
+  font-size: .9em;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 8px;
+}
+
+header nav ul li.field {
+  margin-left: 32px;
+}
+
+header nav ul li:first-child {
+  margin-left: 0;
+}
+
+header nav ul li:last-child {
+  margin-right: 0;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+header nav ul li a.active {
+  font-weight: 900;
+  color: #000000;
+  font-weight: bolder;
+  color: #18ff61;
+  color: #caffdb;
+  color: #bcf2ff;
+  padding-bottom:12px;
+}
+
+#num-type {
+    margin:0.3em;
+}
+footer {
+  padding: 20px 60px;
+  font-size: 18px;
+}
+
+main {
+  padding: 26px 0;
+  text-align: center;
+  /*background-color: #ffffff;*/
+}
+
+label {
+  color: #000000;
+}
+
+main .box {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+
+main #plot {
+  width: 600px;
+  height: 600px;
+}
+
+main #form {
+  margin: 2em 1em 0 1em;
+}
+
+main #summary {
+  margin: .7em .35em 0 .35em;
+}
+
+main #form .parameters p {
+  display: inline-block;
+  margin: 7px 5px 7px 0;
+  text-align: right;
+  width: 6em;
+}
+
+main #form .parameters .placeholder {
+  display: inline-block;
+  width: 5.8em;
+  margin: 0 24px 0 0;
+}
+
+main #form .parameters .parameter {
+  display: inline-block;
+  border: 1px solid #a0a0a0;
+  border-radius: 3px;
+}
+
+main #form .parameters .parameter.curve-coefficient {
+  background-color: #c2e0f8;
+}
+
+main #form .parameters .parameter.point-coordinate,
+main #form .parameters .parameter.multiplication-factor {
+  background-color: #edd078;
+}
+
+main #form .parameters .parameter.result {
+  background-color: #dd6767;
+}
+
+main #form .parameters .parameter label {
+  display: inline-block;
+  margin: 0 5px;
+  height: 100%;
+  width: 0.8em;
+  text-align: center;
+}
+
+main #form .parameters .parameter input {
+  display: inline-block;
+  margin: 1px;
+  padding: 1px 5px;
+  width: 5em;
+  border: 0 none;
+}
+
+path {
+  stroke-width: 3;
+  fill: none;
+}
+
+.steelblue {
+  stroke: steelblue;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  stroke-width:3;
+
+  shape-rendering: crispEdges;
+}
+
+
+.domain { 
+  stroke: #545454;
+  stroke-width: 2;
+  fill: none;
+}
+
+
+.grayLine line {
+  stroke: #eaeaea;
+}
+
+.blackLine path {
+  stroke: black;
+  stroke-width:3;
+}
+
+path.yellowLine {
+  stroke: #edd078;
+  stroke-width:3;
+}
+
+path.redLine {
+  stroke: #dd6767;
+  stroke-width:3;
+}
+
+#plotArea {
+  margin-right: 2em;
+  margin-left: 2em;
+}
+
+nav>ul>li>a {
+  cursor: pointer;
+}
+
+circle {
+  stroke-width: 3;
+}
+
+#plot {
+  display: none;
+}
+
+p {
+  padding-top: 10px;
+  margin-left: 5px;
+}
+
+header {
+  background-color: #6489c1;
+  background-image: linear-gradient(to bottom right, #1ca74db5, #002229d6);
+  background-image: linear-gradient(to bottom right, #000000b5, #000401d6);
+  color: #ffeaea;
+}
+
+#footer {
+  position: absolute;
+  max-width: 100%;
+  height: 7rem;
+  min-width: -webkit-fill-available;
+}
 
 .site-footer {
     width:100%;
@@ -578,7 +597,7 @@ form {
     height: 10rem;
 }
 
-  .site-footer {
+.site-footer {
     position: relative;
     z-index: 2;
     /*background: rgba(0,0,0,0.6);*/
@@ -602,18 +621,61 @@ form {
 }
 
 .byteView {
-    margin-bottom:20px;
+    margin-bottom:8px;
+    max-width:600px;
 }
 
+.byteView > label {
+  display: table;
+  margin-bottom:4px;
+}
 
+.byteView > div {
 
+}
 
+.modifyField {
+  display:block;
+  vertical-align: top;
+  margin-top: -1.2em;
+  margin-left: 6em;
+}
 
+.modifyField > i {
+  margin-left: 8px;
+  position: relative;
+  cursor: pointer;
+  color: #0a9481;
+}
 
+.modifyField > i:hover {
+color: #008ddf;
+}
 
+.copied
+{
+  display: none;
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  padding: 20px;
+  min-width: 10%;
+  background-color: #333;
+  text-align: center;
+  border-radius: 2px;
+  padding: 10px;
+  position: fixed;
+  z-index: 5;
+  left: 30%;
+  bottom: 50%;
+  background-color: #c9c9f1;
+  color: black;
 
+  margin-left: 0%;
+  font-weight:bold;
+  border: 1px solid #a3a3a3;
 
-
+  margin-right: 15%;
+}
 
 #homelink {
   position: absolute;
@@ -638,7 +700,6 @@ form {
   z-index: 1
 }
 
-
 .content-bg {
   position: fixed;
   height: 100%;
@@ -655,7 +716,6 @@ form {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
 
 #page-container {
   position: relative;
@@ -684,7 +744,6 @@ form {
   margin-top: 60px;
   text-align: center;
 }
-
 
 .copyright-text {
   font-size: 12px;

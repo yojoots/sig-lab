@@ -60,23 +60,36 @@ function populateGrid() {
         });
 }
 
-function hexToBase64(hexstring) {
-    return btoa(hexstring.match(/\w{2}/g).map(function(a) {
+function hexToBytes(hexString) {
+    for (var bytes = [], c = 0; c < hexString.length; c += 2)
+    bytes.push(parseInt(hexString.substr(c, 2), 16));
+    return bytes;
+}
+
+function hexToBase58(hexString) {
+    const bytes = hexToBytes(hexString, 'hex')
+    return bs58.encode(bytes)
+}
+
+function hexToBase64(hexString) {
+    return btoa(hexString.match(/\w{2}/g).map(function(a) {
         return String.fromCharCode(parseInt(a, 16));
     }).join(""));
 }
 
-function updateKey() {
-    let binaryString = "";
-    keyData.forEach(square => { if (square.value) {binaryString += "1"} else {binaryString += "0"}});
+function updateKey(binaryString = "") {
+    if(binaryString == "") {
+        keyData.forEach(square => { if (square.value) {binaryString += "1"} else {binaryString += "0"}});
+    }
     let hexString = "";
     for (i = 0; i < binaryString.length; i+=8) {
         hexString += parseInt(binaryString.substring(i, i+8), 2).toString(16).padStart(2, '0');
     }
     document.getElementById("hexKey").innerText = hexString;
     document.getElementById("binKey").innerText = binaryString;
-
     document.getElementById("base64Key").innerText = hexToBase64(hexString);
+    document.getElementById("base58Key").innerText = hexToBase58(hexString);
+    //$('div.keyOutput').trigger("DOMSubtreeModified");
 }
 
 function randomize() {
@@ -98,8 +111,21 @@ function randomize() {
         });
 
       updateKey();
-
     } else { throw new Error("Your browser can't generate secure random numbers"); }
+}
+
+function binaryToGrid() {
+    let binarystring = document.getElementById("binKey").innerText;
+    for (var i = 0; i < binarystring.length && i < 256; i++) {
+        keyData[i].value = (binarystring.charAt(i) == "1")
+    }
+    d3.selectAll("rect").data(keyData).transition()
+    .style("fill", function(d) {
+        if (d.value) { return "black" }
+        else { return "#fff" };
+    });
+
+  updateKey();
 }
 
 
