@@ -8,6 +8,7 @@ parser.add_argument("-s", "--signature", help="signature")
 parser.add_argument("-m", "--message", help="message or file containing message")
 parser.add_argument("-k", "--key", help="key")
 parser.add_argument("-a", "--address", help="address")
+parser.add_argument("-n", "--noprepend", help="do not prepend 'Bitcoin Signed Message:' and newlines")
 args = parser.parse_args()
 
 if not args.signature:
@@ -78,7 +79,7 @@ def gather_components():
                 f.close()
             else:
                 message = args.message.rstrip("\n")
-            if not message.startswith("Bitcoin Signed Message:\n"):
+            if not message.startswith("Bitcoin Signed Message:\n") and not args.noprepend:
                 message = (
                     """Bitcoin Signed Message:
 """
