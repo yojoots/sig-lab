@@ -33,15 +33,15 @@
     <label for="binaryCheck">Binary</label>
   </p>
   <p>
-    <input type="checkbox" id="base64Check" data-id="base64Div" />
+    <input type="checkbox" id="base64Check" checked="checked" data-id="base64Div" />
     <label for="base64Check">Base64</label>
   </p>
   <p>
-    <input type="checkbox" id="base58Check" data-id="base58Div" />
+    <input type="checkbox" id="base58Check" checked="checked" data-id="base58Div" />
     <label for="base58Check">Base58</label>
   </p>
   <p>
-    <input type="checkbox" id="base58CheckCheck" data-id="base58CheckDiv" />
+    <input type="checkbox" id="base58CheckCheck" checked="checked" data-id="base58CheckDiv" />
     <label for="base58CheckCheck">Base58Check</label>
   </p>
   <!--<p>
@@ -61,28 +61,28 @@
     <div id="hexDiv" class="byteView">
     <label><b>Hex</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="hexKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000</div><textarea id="hexInput" class="keyOutput" rows="1">0000000000000000000000000000000000000000000000000000000000000000</textarea></div>
+    <div id="hexKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000</div><textarea id="hexInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'hex', 'ABCDEFabcdef0123456789')" onkeyup="processEditKeyUp(event, 'hex', 'ABCDEFabcdef0123456789')" onpaste="pasteHandler(event, 'hex', 'ABCDEFabcdef0123456789')">0000000000000000000000000000000000000000000000000000000000000000</textarea></div>
     <div id="binaryDiv" class="byteView">
     <label><b>Binary</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="binKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div><textarea id="binInput" class="keyOutput" rows="4">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</textarea></div>
-    <div id="base64Div" style="display: none;" class="byteView">
+    <div id="binKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div><textarea id="binInput" class="keyOutput" rows="4" onkeypress="processEditKeyPress(event, 'binary', '01')" onkeyup="processEditKeyUp(event, 'binary', '01')" onpaste="pasteHandler(event, 'binary', '01')">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</textarea></div>
+    <div id="base64Div" class="byteView">
     <label><b>Base64</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base64Key" class="keyOutput">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</div><textarea id="base64Input" class="keyOutput" rows="1">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</textarea></div>
-    <div id="base58Div" style="display: none;" class="byteView">
+    <div id="base64Key" class="keyOutput">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</div><textarea id="base64Input" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onkeyup="processEditKeyUp(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onpaste="pasteHandler(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</textarea></div>
+    <div id="base58Div" class="byteView">
     <label><b>Base58</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base58Key" class="keyOutput">11111111111111111111111111111111</div><textarea id="base58CheckInput" class="keyOutput" rows="1">11111111111111111111111111111111</textarea></div>
-    <div id="base58CheckDiv" style="display: none;" class="byteView">
+    <div id="base58Key" class="keyOutput">11111111111111111111111111111111</div><textarea id="base58Input" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')"  onpaste="pasteHandler(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
+    <div id="base58CheckDiv" class="byteView">
     <label><b>Base58Check</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base58CheckKey" class="keyOutput">11111111111111111111111111111111273Yts</div><textarea id="base58CheckInput" class="keyOutput" rows="1">11111111111111111111111111111111273Yts</textarea></div>
+    <div id="base58CheckKey" class="keyOutput">11111111111111111111111111111111273Yts</div><textarea id="base58CheckInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111273Yts</textarea></div>
     <div id="wifDiv" style="display: none;" class="byteView">
     <label><b>WIF</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
     <div id="wifKey" class="keyOutput">11111111111111111111111111111111</div>
-    <textarea id="wifInput" class="keyOutput" rows="1">11111111111111111111111111111111</textarea></div>
+    <textarea id="wifInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
 
     <div id="snackbar" class="auto">
     <span class="closebtn snackclose" onclick="closeAndRememberWarning();">&times;</span> 
@@ -91,7 +91,8 @@
     </div>
 </div>
 
-<div class="copied">Copied to clipboard</div>
+<div id="copied" class="tinyAlert">Copied to clipboard</div>
+<div id="unpastable" class="tinyAlert">Clipboard text incompatible with target field</div>
 
 </body>
 <script src="js/bs58.bundle.js" type="text/javascript"></script>
@@ -115,6 +116,142 @@ function closeAndRememberWarning() {
       // Store data
       sessionStorage.setItem("nowarning", "true");
   }
+}
+
+function processEditKeyPress(event, datatype, acceptedChars)
+{
+    if (!acceptedChars.includes(event.key)) {
+      event.preventDefault();
+      return;
+    }
+}
+
+function processEditKeyUp(event, datatype, acceptedChars)
+{
+    if (!acceptedChars.includes(event.key)) {
+      event.preventDefault();
+      return;
+    }
+    switch(datatype) {
+      case "binary":
+        binaryString = event.target.value;
+        document.getElementById("binKey").innerText = binaryString;
+        binaryToGrid();
+        hexString = binaryToHex(binaryString);
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "hex":
+        hexString = event.target.value;
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base64":
+        base64string = event.target.value;
+        hexString = base64ToHex(base64string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base58":
+        base58string = event.target.value;
+        hexString = base58ToHex(base58string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base58check":
+        base58string = event.target.value;
+        hexString = base58CheckToHex(base58string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        break;
+      default:
+        console.log(datatype);
+    }
+}
+
+function pasteHandler(event, datatype, acceptedChars) {
+  let clipboardData = event.clipboardData || window.clipboardData;
+  let pastedData = clipboardData.getData('Text');
+  for (var i = 0; i < pastedData.length; i++) {
+    if (!acceptedChars.includes(pastedData.charAt(i))) {
+      event.preventDefault();
+      $("#unpastable").show().delay(800).fadeOut();
+      return;
+    }
+  }
+
+  switch(datatype) {
+      case "binary":
+        binaryString = pastedData;
+        document.getElementById("binKey").innerText = binaryString;
+        binaryToGrid();
+        hexString = binaryToHex(binaryString);
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "hex":
+        hexString = pastedData;
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base64":
+        base64string = pastedData;
+        hexString = base64ToHex(base64string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase58Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base58":
+        base58string = pastedData;
+        hexString = base58ToHex(base58string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58CheckFields(hexString);
+        break;
+      case "base58check":
+        base58string = pastedData;
+        hexString = base58CheckToHex(base58string);
+        binaryString = hexToBinary(hexString);
+        updateBinaryFields(binaryString);
+        binaryToGrid();
+        updateHexFields(hexString);
+        updateBase64Fields(hexString);
+        updateBase58Fields(hexString);
+        break;
+      default:
+        console.log(datatype);
+    }
+
 }
 
 $(document).ready(function(){
@@ -153,7 +290,7 @@ $(document).ready(function(){
       document.execCommand("copy");
       $temp.remove();
       $(this).closest('.byteView').find('textarea').val();
-      $(".copied").show().delay(800).fadeOut();
+      $("#copied").show().delay(800).fadeOut();
   });
 
   $('div.keyOutput').on('DOMSubtreeModified',function(){
@@ -162,17 +299,7 @@ $(document).ready(function(){
 
   $('textarea.keyOutput').change(function(){
     $(this).closest('.byteView').find('div.keyOutput').text($(this).val());
-    if ($(this)[0].id == "binInput") {
-      binaryToGrid();
-    } else if ($(this)[0].id == "binInput") {
-      binaryToGrid();
-      function hex2bin(hex){
-        return ("00000000" + (parseInt(hex, 16)).toString(2)).substr(-8);
-      }
-      updateKey();
-    }
   });
-
 
 });
 </script>

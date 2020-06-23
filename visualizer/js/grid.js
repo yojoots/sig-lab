@@ -48,7 +48,7 @@ function populateGrid() {
                 d.value = !d.value;
                 if ( d.value ) { d3.select(this).style("fill","black"); }
                 else { d3.select(this).style("fill","#fff"); }
-                updateKey();
+                readFromGrid();
             }
         })
         .on("mousedown", function(d) {
@@ -56,7 +56,7 @@ function populateGrid() {
             d.value = !d.value;
             if ( d.value ) { d3.select(this).style("fill","black"); }
             else { d3.select(this).style("fill","#fff"); }
-            updateKey();
+            readFromGrid();
         });
 }
 
@@ -71,9 +71,21 @@ function hexToBase58(hexString) {
     return bs58.encode(bytes)
 }
 
+function base58ToHex(base58String) {
+    return Array.from(bs58.decode(base58String), function(byte) {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+      }).join('')
+}
+
 function hexToBase58Check(hexString) {
     const bytes = hexToBytes(hexString, 'hex')
     return b58c.getName(bytes)
+}
+
+function base58CheckToHex(base58String) {
+    return Array.from(bs58.decode(base58String), function(byte) {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+      }).join('')
 }
 
 function hexToBase64(hexString) {
@@ -82,20 +94,73 @@ function hexToBase64(hexString) {
     }).join(""));
 }
 
-function updateKey(binaryString = "") {
-    if(binaryString == "") {
-        keyData.forEach(square => { if (square.value) {binaryString += "1"} else {binaryString += "0"}});
+function base64ToHex(base64String) {
+    const raw = atob(base64String);
+    let result = '';
+    for (let i = 0; i < raw.length; i++) {
+        const hex = raw.charCodeAt(i).toString(16);
+        result += (hex.length === 2 ? hex : '0' + hex);
     }
+    return result.toUpperCase();
+}
+
+function hexToBinary(hexString){
+    let fullBinaryString = "";
+    for (var i = 0; i < hexString.length; i=i+2) {
+        miniHexString = hexString[i] + hexString[i+1]
+        fullBinaryString += ("00000000" + (parseInt(miniHexString, 16)).toString(2)).substr(-8);
+    }
+    return fullBinaryString;
+  }
+
+function binaryToHex(binaryString) {
     let hexString = "";
     for (i = 0; i < binaryString.length; i+=8) {
         hexString += parseInt(binaryString.substring(i, i+8), 2).toString(16).padStart(2, '0');
     }
-    document.getElementById("hexKey").innerText = hexString;
+    return hexString;
+}
+
+function updateBinaryFields(binaryString) {
     document.getElementById("binKey").innerText = binaryString;
-    document.getElementById("base64Key").innerText = hexToBase64(hexString);
-    document.getElementById("base58Key").innerText = hexToBase58(hexString);
-    document.getElementById("base58CheckKey").innerText = hexToBase58Check(hexString);
-    //$('div.keyOutput').trigger("DOMSubtreeModified");
+    document.getElementById("binInput").value = binaryString;
+}
+
+function updateHexFields(hexString) {
+    document.getElementById("hexKey").innerText = hexString;
+    document.getElementById("hexInput").value = hexString;
+}
+
+function updateBase64Fields(hexString) {
+    let base64string = hexToBase64(hexString);
+    document.getElementById("base64Key").innerText = base64string;
+    document.getElementById("base64Input").value = base64string;
+}
+
+function updateBase58Fields(hexString) {
+    let base58string = hexToBase58(hexString);
+    document.getElementById("base58Key").innerText = base58string;
+    document.getElementById("base58Input").value = base58string;
+}
+
+function updateBase58CheckFields(hexString) {
+    let base58checkstring = hexToBase58Check(hexString);
+    document.getElementById("base58CheckKey").innerText = base58checkstring;
+    document.getElementById("base58CheckInput").value = base58checkstring;
+}
+
+function readFromGrid(binaryString = "", fieldToIgnore = "none") {
+    if(binaryString == "") {
+        keyData.forEach(square => { if (square.value) {binaryString += "1"} else {binaryString += "0"}});
+    }
+    
+    if (fieldToIgnore !== "binary") updateBinaryFields(binaryString);
+
+    let hexString = binaryToHex(binaryString);
+    if (fieldToIgnore !== "hex") updateHexFields(hexString);
+    if (fieldToIgnore !== "base64") updateBase64Fields(hexString);
+    if (fieldToIgnore !== "base58") updateBase58Fields(hexString);
+    if (fieldToIgnore !== "base58check") updateBase58CheckFields(hexString);
 }
 
 function randomize() {
@@ -116,12 +181,13 @@ function randomize() {
             else { return "#fff" };
         });
 
-      updateKey();
+      readFromGrid();
     } else { throw new Error("Your browser can't generate secure random numbers"); }
 }
 
 function binaryToGrid() {
     let binarystring = document.getElementById("binKey").innerText;
+    console.log("B2G:", binarystring)
     for (var i = 0; i < binarystring.length && i < 256; i++) {
         keyData[i].value = (binarystring.charAt(i) == "1")
     }
@@ -130,8 +196,6 @@ function binaryToGrid() {
         if (d.value) { return "black" }
         else { return "#fff" };
     });
-
-  updateKey();
 }
 
 

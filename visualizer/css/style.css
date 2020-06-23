@@ -646,13 +646,14 @@ header {
   position: relative;
   cursor: pointer;
   color: #0a9481;
+  display: unset;
 }
 
 .modifyField > i:hover {
 color: #008ddf;
 }
 
-.copied
+.tinyAlert
 {
   display: none;
   min-width: 250px; /* Set a default minimum width */
