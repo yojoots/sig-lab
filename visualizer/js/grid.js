@@ -187,7 +187,6 @@ function randomize() {
 
 function binaryToGrid() {
     let binarystring = document.getElementById("binKey").innerText;
-    console.log("B2G:", binarystring)
     for (var i = 0; i < binarystring.length && i < 256; i++) {
         keyData[i].value = (binarystring.charAt(i) == "1")
     }

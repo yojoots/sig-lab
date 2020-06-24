@@ -61,28 +61,28 @@
     <div id="hexDiv" class="byteView">
     <label><b>Hex</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="hexKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000</div><textarea id="hexInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'hex', 'ABCDEFabcdef0123456789')" onkeyup="processEditKeyUp(event, 'hex', 'ABCDEFabcdef0123456789')" onpaste="pasteHandler(event, 'hex', 'ABCDEFabcdef0123456789')">0000000000000000000000000000000000000000000000000000000000000000</textarea></div>
+    <div id="hexKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000</div><textarea id="hexInput" class="keyOutput" rows="1" onkeydown="processEditKeyPress(event, 'hex', 'ABCDEFabcdef0123456789')" onkeyup="processEditKeyUp(event, 'hex', 'ABCDEFabcdef0123456789')" onpaste="pasteHandler(event, 'hex', 'ABCDEFabcdef0123456789')">0000000000000000000000000000000000000000000000000000000000000000</textarea></div>
     <div id="binaryDiv" class="byteView">
     <label><b>Binary</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="binKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div><textarea id="binInput" class="keyOutput" rows="4" onkeypress="processEditKeyPress(event, 'binary', '01')" onkeyup="processEditKeyUp(event, 'binary', '01')" onpaste="pasteHandler(event, 'binary', '01')">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</textarea></div>
+    <div id="binKey" class="keyOutput">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</div><textarea id="binInput" class="keyOutput" rows="4" onkeydown="processEditKeyPress(event, 'binary', '01')" onkeyup="processEditKeyUp(event, 'binary', '01')" onpaste="pasteHandler(event, 'binary', '01')">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</textarea></div>
     <div id="base64Div" class="byteView">
     <label><b>Base64</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base64Key" class="keyOutput">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</div><textarea id="base64Input" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onkeyup="processEditKeyUp(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onpaste="pasteHandler(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</textarea></div>
+    <div id="base64Key" class="keyOutput">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</div><textarea id="base64Input" class="keyOutput" rows="1" onkeydown="processEditKeyPress(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onkeyup="processEditKeyUp(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')" onpaste="pasteHandler(event, 'base64', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=')">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</textarea></div>
     <div id="base58Div" class="byteView">
     <label><b>Base58</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base58Key" class="keyOutput">11111111111111111111111111111111</div><textarea id="base58Input" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')"  onpaste="pasteHandler(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
+    <div id="base58Key" class="keyOutput">11111111111111111111111111111111</div><textarea id="base58Input" class="keyOutput" rows="1" onkeydown="processEditKeyPress(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')"  onpaste="pasteHandler(event, 'base58', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
     <div id="base58CheckDiv" class="byteView">
     <label><b>Base58Check</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
-    <div id="base58CheckKey" class="keyOutput">11111111111111111111111111111111273Yts</div><textarea id="base58CheckInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111273Yts</textarea></div>
+    <div id="base58CheckKey" class="keyOutput">11111111111111111111111111111111273Yts</div><textarea id="base58CheckInput" class="keyOutput" rows="1" onkeydown="processEditKeyPress(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'base58check', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111273Yts</textarea></div>
     <div id="wifDiv" style="display: none;" class="byteView">
     <label><b>WIF</b></label><div class="modifyField"><i title="Edit" class="fa fa-edit"></i><i title="Lock" class="fa fa-lock" style="display:none;"></i><i title="Copy" class="fa fa-clipboard" style="font-size: 15px;
   bottom: 2px;"></i></div>
     <div id="wifKey" class="keyOutput">11111111111111111111111111111111</div>
-    <textarea id="wifInput" class="keyOutput" rows="1" onkeypress="processEditKeyPress(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
+    <textarea id="wifInput" class="keyOutput" rows="1" onkeydown="processEditKeyPress(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onkeyup="processEditKeyUp(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')" onpaste="pasteHandler(event, 'wif', '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')">11111111111111111111111111111111</textarea></div>
 
     <div id="snackbar" class="auto">
     <span class="closebtn snackclose" onclick="closeAndRememberWarning();">&times;</span> 
@@ -120,9 +120,15 @@ function closeAndRememberWarning() {
 
 function processEditKeyPress(event, datatype, acceptedChars)
 {
-    if (!acceptedChars.includes(event.key)) {
-      event.preventDefault();
-      return;
+    if (!(acceptedChars.includes(event.key))) {
+        if (!event.ctrlKey && (String.fromCharCode(event.keyCode).match(/(\w|\s)/g))) {
+          // key is a character and "ctrl" isn't pressed
+          event.preventDefault();
+        } else {
+          // key is a non-char
+          // e.g. 'esc', 'backspace', 'up arrow'
+          return;
+        }
     }
 }
 
@@ -188,8 +194,10 @@ function processEditKeyUp(event, datatype, acceptedChars)
 }
 
 function pasteHandler(event, datatype, acceptedChars) {
+
   let clipboardData = event.clipboardData || window.clipboardData;
-  let pastedData = clipboardData.getData('Text');
+  let pastedData = clipboardData.getData('Text').trim();
+
   for (var i = 0; i < pastedData.length; i++) {
     if (!acceptedChars.includes(pastedData.charAt(i))) {
       event.preventDefault();
@@ -197,6 +205,14 @@ function pasteHandler(event, datatype, acceptedChars) {
       return;
     }
   }
+
+  // This is mostly to auto-trim (clean up) the pasted content, for more information, see
+  // https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event and
+  // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+  event.preventDefault();
+  event.target.value = pastedData;
+  var manualChangeTrigger = new Event('change');
+  event.target.dispatchEvent(manualChangeTrigger);
 
   switch(datatype) {
       case "binary":
@@ -251,7 +267,6 @@ function pasteHandler(event, datatype, acceptedChars) {
       default:
         console.log(datatype);
     }
-
 }
 
 $(document).ready(function(){
@@ -293,12 +308,8 @@ $(document).ready(function(){
       $("#copied").show().delay(800).fadeOut();
   });
 
-  $('div.keyOutput').on('DOMSubtreeModified',function(){
-    $(this).closest('.byteView').find('textarea').val($(this)[0].innerText);
-  });
-
   $('textarea.keyOutput').change(function(){
-    $(this).closest('.byteView').find('div.keyOutput').text($(this).val());
+      $(this).closest('.byteView').find('div.keyOutput').text($(this).val());
   });
 
 });
